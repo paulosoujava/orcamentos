@@ -1,0 +1,33 @@
+{
+  "name": "artillery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -r dotenv/config ./index.js dotenv_config_path=./.env",
+    "deploy": "bash ./deploy.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "puresql": "^1.8.0",
+    "serverless-http": "^2.3.2",
+    "express-ejs-layouts": "^2.3.1",
+    "ejs": "^3.1.5"
+  },
+  "devDependencies": {
+    "aws-sdk": "2.766.0",
+    "dotenv-safe": "8.2.0",
+    "express-list-endpoints": "4.0.1",
+    "nodemon": "^2.0.4",
+    "eslint-plugin-standard": "^4.0.1",
+    "git-commit-msg-linter": "^2.4.4",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "standard": "^14.3.4"
+  }
+}

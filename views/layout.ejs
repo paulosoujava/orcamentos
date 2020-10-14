@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Pedidos e Oçamentos</title>
+
+  <!-- CSS  -->
+  <%- include('partials/headScripts'); %>
+</head>
+<body>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">OrcPed</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/pfpj">PF/PJ</a></li>
+        <li><a href="/header">Cabeçalho</a></li>
+        <li><a href="/footer">Rodapé</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="/pfpj">PF/PJ</a></li>
+        <li><a href="/header">Cabeçalho</a></li>
+        <li><a href="/footer">Rodapé</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <%- body %>
+  
+  <!--  Scripts-->
+  <%- include('partials/footerScripts'); %>
+
+  </body>
+</html>

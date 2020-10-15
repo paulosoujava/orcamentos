@@ -8,11 +8,11 @@ exports.index = async function (req, res) {
   } else {
     result = await generic.index(res.locals.mysql)
   }
-  // res.json(result)
-  res.render('pages/home', { result })
+  res.json(result)
 }
 
 exports.create = async function (req, res) {
+  console.log(req.body)
   const result = await generic.create(res.locals.mysql, req.body)
   res.json(result)
 }
@@ -23,6 +23,6 @@ exports.update = async function (req, res) {
 }
 
 exports.delete = async function (req, res) {
-  const result = await generic.delete(res.locals.mysql, req.body)
+  const result = await generic.delete(res.locals.mysql, req.params.id)
   res.json(result)
 }

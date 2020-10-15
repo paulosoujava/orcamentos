@@ -8,7 +8,7 @@ const itemPedOrc = require('../controller/pedOrcItem')
 router.get('/', generic.index)
 router.post('/create', generic.create)
 router.put('/update', generic.update)
-router.delete('/delete', generic.delete)
+router.delete('/delete/:id', generic.delete)
 
 /**
  * {
@@ -18,7 +18,8 @@ router.delete('/delete', generic.delete)
     "cidade" : "Florianópolis",
     "uf" : "SC",
     "obs" : "",
-    "endereco" : "AV. joreg lacerda 2956 Fundos, Costeira do Pirajubaé cep 88047-001"
+    "endereco" : "AV. joreg lacerda 2956 Fundos, Costeira do Pirajubaé cep 88047-001",
+    "cpfCnpj":"123.123.+-56"
 }
  */
 

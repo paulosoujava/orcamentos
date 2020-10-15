@@ -18,7 +18,8 @@ class Generic {
         cidade: data.cidade,
         uf: data.uf,
         obs: data.obs,
-        endereco: data.endereco
+        endereco: data.endereco,
+        cpfCnpj: data.cpfCnpj
       }, this._adapter))
   }
 
@@ -47,12 +48,13 @@ class Generic {
         cidade: data.cidade,
         uf: data.uf,
         obs: data.obs,
-        endereco: data.endereco
+        endereco: data.endereco,
+        cpfCnpj: data.cpfCnpj
       }, this._adapter))
   }
 
-  async deleteGeneric (data) {
-    return this.hasExceptions(this._queries.deleteGeneric({ email: data.email }, this._adapter))
+  async deleteGeneric (id) {
+    return this.hasExceptions(this._queries.deleteGeneric({ id }, this._adapter))
   }
 
   //* ***************** PEDIDOS ORCAMENTOS  *******************/

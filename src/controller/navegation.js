@@ -1,5 +1,21 @@
+
+const axios = require('axios')
+
+// Or like this...
+const customInstance = axios.create({
+  baseURL: 'http://localhost:5001/api',
+  headers: { Accept: 'application/json' }
+})
 exports.home = async function (req, res) {
-  res.render('pages/home')
+  let clients
+  try {
+    const result = await customInstance.get('/')
+    clients = result.data
+  } catch (error) {
+    clients = {}
+    console.error(error)
+  }
+  res.render('pages/home', { clients: clients.message })
 }
 
 exports.footer = async function (req, res) {
@@ -48,10 +64,15 @@ exports.editOrcPed = async function (req, res) {
 }
 
 exports.pfpj = async function (req, res) {
-  const { id } = req.query
-  let title = 'Cadastro PF/PJ'
-  if (id) {
-    title = 'Editar PF/PJ'
+  const { email } = req.query
+  const data = { title: '' }
+  try {
+    const result = await customInstance.get(`?email=${email}`)
+    data.client = result.data.message[0] ? result.data.message[0] : {}
+  } catch (error) {
+    console.error(error)
   }
-  res.render('pages/pf_pj', { title })
+  console.log(data)
+  data.title = (email && data.client.nome) ? `Cliente: ${data.client.nome}` : 'Cadastro PF/PJ'
+  res.render('pages/pf_pj', { data })
 }

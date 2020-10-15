@@ -2,12 +2,12 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const paramStore = require('./libs')
-
+const path = require('path')
 const app = express()
 
 app.set('view engine', 'ejs')
 app.set('views', 'views')
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, '../public')))
 app.use(expressLayouts)
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -51,6 +51,30 @@ app.use(function (req, res, next) {
   next()
 })
 
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  )
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept,request-type,version'
+  )
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  next()
+})
+
+app.use(bodyParser.json({ limit: '50mb' }))
+
+app.use(
+  bodyParser.urlencoded({
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000
+  })
+)
 const apiRoutes = require('./routes')
 app.use('/api', apiRoutes)
 app.use('/', require('./routes/navegation'))

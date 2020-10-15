@@ -1,6 +1,6 @@
 -- name: createGenreic
-INSERT INTO generic (nome, email, telefone, cidade, uf, obs, endereco)
-VALUES (:nome,  :email, :telefone, :cidade, :uf, :obs, :endereco);
+INSERT INTO generic (nome, email, telefone, cidade, uf, obs, endereco, cpfCnpj)
+VALUES (:nome,  :email, :telefone, :cidade, :uf, :obs, :endereco, :cpfCnpj);
 
 -- name: checkByEmail
 SELECT * FROM orcamento.generic WHERE email = :email;
@@ -10,11 +10,11 @@ SELECT * FROM orcamento.generic WHERE idGeneric = :id;
 
 -- name: updateByEmail
 UPDATE generic
-SET nome = :nome,  telefone= :telefone, cidade= :cidade, uf= :uf, obs= :obs, endereco= :endereco
+SET nome = :nome,  telefone= :telefone, cidade= :cidade, uf= :uf, obs= :obs, endereco= :endereco, cpfCnpj= :cpfCnpj
 WHERE  email = :email;
 
 --name: deleteGeneric
-DELETE  FROM orcamento.generic WHERE email = :email;
+DELETE  FROM orcamento.generic WHERE idGeneric = :id;
 
 --name: getAll
 SELECT * FROM orcamento.generic

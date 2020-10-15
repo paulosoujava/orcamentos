@@ -1,5 +1,17 @@
 const Generic = require('../db/dao/generic')
 
+exports.index = async function (conn, id) {
+  const generic = new Generic(conn)
+  const result = {}
+  result.itemsOrcPeds = await generic.getAllOcrPed(id)
+  const last = await generic.getLastOcrPed()
+  const lastItems = await generic.getLastItemsOcrPed(id)
+  console.log(last[0].idOrcPed)
+  result.lastOrcPed = last[0]
+  result.lastItemsOrcPed = lastItems
+  return _errors(false, result)
+}
+
 exports.create = async function (conn, data, id) {
   const generic = new Generic(conn)
   if (!await checkThisGeneric(conn, id)) return _errors(true, 'ops,este usuário não existe')
@@ -15,7 +27,7 @@ exports.create = async function (conn, data, id) {
 exports.update = async function (conn, data, id) {
   const generic = new Generic(conn)
   const resut = await generic.checkByIdInOrcPed(id)
-  console.log(resut.length)
+
   if (resut.length >= 1) {
     const saveRes = await generic.updateOrcPed(data, id)
     if (saveRes && saveRes.affectedRows === 1) {

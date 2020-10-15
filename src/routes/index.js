@@ -24,6 +24,7 @@ router.delete('/delete/:id', generic.delete)
  */
 
 // pedORc
+router.get('/pedOrc', pedOrc.index)
 router.post('/create/pedOrc/:id', pedOrc.create)
 router.put('/update/pedOrc/:id', pedOrc.update)
 router.delete('/delete/pedOrc/:id', pedOrc.delete)

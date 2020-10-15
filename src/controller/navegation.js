@@ -27,7 +27,23 @@ exports.header = async function (req, res) {
 }
 
 exports.listar = async function (req, res) {
-  res.render('pages/listarOrcPed')
+  const data = {}
+  try {
+    const result = await customInstance.get(`/pedOrc?id=${req.query.id}`)
+    console.log(result.data)
+    data.orcPeds = result.data.message.itemsOrcPeds ? result.data.message.itemsOrcPeds : {}
+    data.lastOrcPed = result.data.message.lastOrcPed ? result.data.message.lastOrcPed : {}
+    data.lastItemsOrcPed = result.data.message.lastItemsOrcPed ? result.data.message.lastItemsOrcPed : {}
+  } catch (error) {
+    console.error(error)
+  }
+  if (data.orcPeds) {
+    data.count = Object.keys(data.orcPeds).length
+  } else {
+    data.count = 0
+  }
+
+  res.render('pages/listarOrcPed', { data })
 }
 
 exports.listItemOrcPed = async function (req, res) {

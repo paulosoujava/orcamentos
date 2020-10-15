@@ -19,8 +19,14 @@ DELETE  FROM orcamento.generic WHERE idGeneric = :id;
 --name: getAll
 SELECT * FROM orcamento.generic
 
+--name: getLastOcrPed
+SELECT * FROM orcamento.orcPed  ORDER BY idOrcPed DESC LIMIT 1
+
 --name: getOne
 SELECT * FROM orcamento.generic WHERE email = :email
+
+--name: getAllOcrPed
+SELECT * FROM orcamento.orcPed WHERE idGeneric = :id
 
 --name: createOrcPed
 INSERT INTO orcPed (idOrcPed, tipo, localEntrega, validade, criacao, quantidadeItens, valorTotal, obs, idGeneric, situacao )
@@ -43,6 +49,9 @@ VALUES (:descricao,  :valorUnitario, :quantidade,   :valorTotal, :obs, :idOrcPed
 
 -- name: checkByIdInOrcPedItem
 SELECT * FROM orcamento.orcPedItem WHERE idOrcPedItem = :id;
+
+--name: getLastItemsOcrPed
+SELECT * FROM orcamento.orcPedItem WHERE idOrcPed = :id;
 
 -- name: updateOrcPedItem
 UPDATE orcamento.orcPedItem

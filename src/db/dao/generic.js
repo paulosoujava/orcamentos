@@ -23,6 +23,18 @@ class Generic {
       }, this._adapter))
   }
 
+  async getAllOcrPed (id) {
+    return this.hasExceptions(this._queries.getAllOcrPed({ id }, this._adapter))
+  }
+
+  async getLastOcrPed (id) {
+    return this.hasExceptions(this._queries.getLastOcrPed({ }, this._adapter))
+  }
+
+  async getLastItemsOcrPed (id) {
+    return this.hasExceptions(this._queries.getLastItemsOcrPed({ id }, this._adapter))
+  }
+
   async getAll () {
     return this.hasExceptions(this._queries.getAll({ }, this._adapter))
   }

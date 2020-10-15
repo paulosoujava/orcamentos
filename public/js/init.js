@@ -2,7 +2,7 @@
 (function ($) {
   $(function () {
     $('.sidenav').sidenav()
-
+    $('.modal').modal()
     /**********************************************************************************************
     /** CREATE OR UPDATE PJ PF */
     $('#createOrUpdateBtn').click(function (e) {

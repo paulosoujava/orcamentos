@@ -1,9 +1,18 @@
+const { reset } = require('nodemon')
 const Generic = require('../db/dao/generic')
 
 exports.index = async function (conn) {
   const generic = new Generic(conn)
-  const result = await generic.getAll()
-  return _errors(false, result)
+  const result = {}
+  let total = 0
+  result.clients = await generic.getAll()
+  for (let i = 0; i < result.clients.length; i++) {
+    const qtd = await generic.getAllOcrPed(result.clients[i].idGeneric)
+    total += qtd.length
+    result.clients[i].orcPeds = qtd
+  }
+
+  return _errors(false, result.clients, total)
 }
 
 exports.indexOne = async function (conn, email) {
@@ -52,6 +61,6 @@ exports.delete = async function (conn, id) {
   }
 }
 
-function _errors (erro, message) {
-  return { erro, message }
+function _errors (erro, message, total) {
+  return { erro, message, total }
 }

@@ -22,6 +22,9 @@ SELECT * FROM orcamento.generic
 --name: getLastOcrPed
 SELECT * FROM orcamento.orcPed  ORDER BY idOrcPed DESC LIMIT 1
 
+--name: countOcrPed
+SELECT count(idGeneric) FROM orcamento.orcPed WHERE idGeneric = :id
+
 --name: getOne
 SELECT * FROM orcamento.generic WHERE email = :email
 
@@ -37,7 +40,7 @@ SELECT * FROM orcamento.orcPed WHERE idOrcPed = :id;
 
 -- name: updateOrcPed
 UPDATE orcamento.orcPed
-SET tipo = :tipo,  localEntrega= :localEntrega, validade= :validade, criacao= :criacao, quantidadeItens= :quantidadeItens, valorTotal= :valorTotal, obs= :obs, situacao= :situacao, idOrcPed = :idOrcPed
+SET tipo = :tipo,  localEntrega= :localEntrega, validade= :validade,  obs= :obs, situacao= :situacao, idOrcPed = :idOrcPed
 WHERE  idOrcPed = :id;
 
 --name: deleteOrcPed

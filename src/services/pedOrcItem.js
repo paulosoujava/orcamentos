@@ -38,7 +38,6 @@ exports.delete = async function (conn, id) {
 async function checkThisOrcPed (conn, id) {
   const generic = new Generic(conn)
   const resut = await generic.checkByIdInOrcPed(id)
-  console.log(resut.length)
   return (resut.length >= 1)
 }
 function _errors (erro, message) {

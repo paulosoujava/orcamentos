@@ -27,6 +27,10 @@ class Generic {
     return this.hasExceptions(this._queries.getAllOcrPed({ id }, this._adapter))
   }
 
+  async countOcrPed (id) {
+    return this.hasExceptions(this._queries.countOcrPed({ id }, this._adapter))
+  }
+
   async getLastOcrPed (id) {
     return this.hasExceptions(this._queries.getLastOcrPed({ }, this._adapter))
   }
@@ -71,19 +75,18 @@ class Generic {
 
   //* ***************** PEDIDOS ORCAMENTOS  *******************/
   async createOrcPed (data, id) {
-    console.log(data)
     return this.hasExceptions(this._queries.createOrcPed(
       {
         idOrcPed: data.idOrcPed,
         tipo: data.tipo,
         localEntrega: data.localEntrega ? data.localEntrega : '',
         validade: data.validade ? data.validade : '',
-        criacao: data.criacao ? data.criacao : '',
-        quantidadeItens: data.quantidadeItens ? data.quantidadeItens : '',
-        valorTotal: data.valorTotal ? data.valorTotal : '',
+        criacao: dataAtualFormatada(),
+        quantidadeItens: data.quantidadeItens ? parseInt(data.quantidadeItens) : 0,
+        valorTotal: '00.00',
         obs: data.obs ? data.obs : '',
         idGeneric: id,
-        situacao: data.situacao ? data.situacao : ''
+        situacao: `Criado dia ${dataAtualFormatada()}`
       }, this._adapter))
   }
 
@@ -105,11 +108,8 @@ class Generic {
         tipo: data.tipo,
         localEntrega: data.localEntrega ? data.localEntrega : '',
         validade: data.validade ? data.validade : '',
-        criacao: data.criacao ? data.criacao : '',
-        quantidadeItens: data.quantidadeItens ? data.quantidadeItens : '',
-        valorTotal: data.valorTotal ? data.valorTotal : '',
         obs: data.obs ? data.obs : '',
-        situacao: data.situacao ? data.situacao : '',
+        situacao: `Alterado dia ${dataAtualFormatada()}`,
         idOrcPed: data.idOrcPed,
         id
       }, this._adapter))
@@ -166,5 +166,15 @@ class Generic {
       return error
     }
   }
+}
+
+function dataAtualFormatada () {
+  var data = new Date()
+  var dia = data.getDate().toString()
+  var diaF = (dia.length == 1) ? '0' + dia : dia
+  var mes = (data.getMonth() + 1).toString() // +1 pois no getMonth Janeiro começa com zero.
+  var mesF = (mes.length == 1) ? '0' + mes : mes
+  var anoF = data.getFullYear()
+  return diaF + '/' + mesF + '/' + anoF
 }
 module.exports = Generic

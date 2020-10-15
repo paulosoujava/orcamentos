@@ -15,7 +15,7 @@ exports.home = async function (req, res) {
     clients = {}
     console.error(error)
   }
-  res.render('pages/home', { clients: clients.message })
+  res.render('pages/home', { clients: clients.message, total: clients.total })
 }
 
 exports.footer = async function (req, res) {
@@ -28,9 +28,9 @@ exports.header = async function (req, res) {
 
 exports.listar = async function (req, res) {
   const data = {}
+  data.idClient = req.query.id
   try {
-    const result = await customInstance.get(`/pedOrc?id=${req.query.id}`)
-    console.log(result.data)
+    const result = await customInstance.get(`/pedOrc?id=${data.idClient}`)
     data.orcPeds = result.data.message.itemsOrcPeds ? result.data.message.itemsOrcPeds : {}
     data.lastOrcPed = result.data.message.lastOrcPed ? result.data.message.lastOrcPed : {}
     data.lastItemsOrcPed = result.data.message.lastItemsOrcPed ? result.data.message.lastItemsOrcPed : {}
@@ -68,15 +68,13 @@ exports.editItemOrcPed = async function (req, res) {
 exports.editOrcPed = async function (req, res) {
   // action === create id === PF/PJ
   // action === editar id === OrcPed
-  const { id, type, action } = req.query
+  const { id, type, action, last, numero, validade, obs, endereco, idClient } = req.query
   let title = `Cadastro ${type}`
   if (action === 'editar') {
     title = `Editar ${type}`
     // o id é o do OrcPed
-  } else {
-    // o id é o do Generic
   }
-  res.render('pages/editOrcPed', { title, type })
+  res.render('pages/editOrcPed', { title, type, last, id, action, numero, validade, obs, endereco, idClient })
 }
 
 exports.pfpj = async function (req, res) {
@@ -88,7 +86,6 @@ exports.pfpj = async function (req, res) {
   } catch (error) {
     console.error(error)
   }
-  console.log(data)
   data.title = (email && data.client.nome) ? `Cliente: ${data.client.nome}` : 'Cadastro PF/PJ'
   res.render('pages/pf_pj', { data })
 }

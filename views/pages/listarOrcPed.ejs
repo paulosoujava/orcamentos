@@ -3,17 +3,23 @@
       <a href="/" class="btn-floating btn-small waves-effect waves-light black left"><i class="material-icons">subdirectory_arrow_left</i></a>
        <br />
       <blockquote>
-     <a class="header  red-text flow-text right modal-trigger" href="#modal1" style="margin-bottom: -10px; ">Último Num.: <%=data.lastOrcPed.idOrcPed%></a>
+        <% if(data.lastOrcPed.idOrcPed ) { %>
+           <a class="header  red-text flow-text right modal-trigger" href="#modal1" style="margin-bottom: -10px; ">Último Num.:   <%=data.lastOrcPed.idOrcPed%>
+      
+        <% } else  { %>
+          <a class="header  red-text flow-text right modal-trigger"" style="margin-bottom: -10px; ">Último Num.: 000
+        <%}%>
+    </a>
       <p class="header  black-text flow-text" style="margin-top: -5px; ">Tota de OrcPed  <%=data.count%> </p>
-      <a href="editOrcPed?id=123&action=create&type=Pedido" class="waves-effect waves-light btn blue"><i class="material-icons left ">add_circle_outline</i> Pedido</a>&nbsp; ou &nbsp;
-      <a href="editOrcPed?id=123&action=create&type=Orçamento" class="waves-effect waves-light btn red"><i class="material-icons left ">add_circle_outline</i> Orçamento</a>
+      <a href="editOrcPed?id=<%=data.idClient%>&action=create&type=Pedido&last=<%=data.lastOrcPed.idOrcPed%>" class="waves-effect waves-light btn blue"><i class="material-icons left ">add_circle_outline</i> Pedido</a>&nbsp; ou &nbsp;
+      <a href="editOrcPed?id=<%=data.idClient%>&action=create&type=Orçamento&last=<%=data.lastOrcPed.idOrcPed%>" class="waves-effect waves-light btn red"><i class="material-icons left ">add_circle_outline</i> Orçamento</a>
 
     </blockquote>
     </div>
   </div>
-  <div class="container">
-    <div class="section">
-      <div class="row">
+  <div style="margin-left: 10px; margin-right: 10px;">
+   <br />
+   <hr />
         
        <% if (data.count > 0) { %>
           <h3>Pedidos e Orçamentos</h3>
@@ -21,10 +27,14 @@
           <table>
             <thead>
               <tr>
-                  <th>Número</th>
-                  <th>Tipo</th>
-                  <th>Qtd. Itens</th>
-                  <th>Valor Total</th>
+                  <th class="tooltipped" data-position="bottom" data-tooltip="Número do documento">Núm.</th>
+                  <th class="tooltipped" data-position="bottom" data-tooltip="tipo pedido ou documento">Tipo</th>
+                  <th class="tooltipped" data-position="bottom" data-tooltip="Quantidade de itens">Qtd. It. </th>
+                  <th class="tooltipped" data-position="bottom" data-tooltip="Valor total do pedido">V.T.</th>
+                  <th class="tooltipped" data-position="bottom" data-tooltip="validade do pedido">V.A</th>
+                  <th class="tooltipped" data-position="bottom" data-tooltip="endereço da entrega">End.</th>
+                  <th class="tooltipped" data-position="bottom" data-tooltip="observações">Obs</th>
+                  <th class="tooltipped" data-position="bottom" data-tooltip="status">status</th>
                   <th>Opções</th>
               </tr>
             </thead>
@@ -33,32 +43,36 @@
           <% data.orcPeds.forEach(function(op){ %>
             <tr>
               <td><%=op.idOrcPed%></td>
-              <td><%=op.tipo%></td>
+              <td><span style="padding: 5px;" class="<%if(op.tipo === 'Pedido'){%>red <%}else{%> blue <%}%>  white-text flow-text"  > <%=op.tipo%> </span> </td>
               <td><%=op.quantidadeItens%></td>
               <td><%=op.valorTotal%></td>
+              <td><%=op.validade%></td>
+              <td><%=op.localEntrega.substring(0,30)  %><%if(op.localEntrega.length > 30){%>... <%}%></td>
+              <td><%=op.obs.substring(0, 30)%> <%if(op.obs.length > 30){%>... <%}%></td>
+              <td><b><%=op.situacao%></b></td>
               <td>
-                <a href="<%=op.idOrcPed%>" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
-                <a href="<%=op.idOrcPed%>" href="editOrcPed?id=123&action=editar&type=Pedido" class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">edit</i></a>
-                <a href="<%=op.idOrcPed%>" href="listItemOrcPed?id=123&type=Pedido" class="btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
-                <a href="<%=op.idOrcPed%>" class="btn-floating btn-small waves-effect waves-light teal"><i class="material-icons">picture_as_pdf</i></a>
+                <a onClick=(deleteOrcPed('<%= op.idOrcPed %>')) class="btn-floating btn-small waves-effect waves-light red tooltipped" data-position="bottom" data-tooltip="deletar pedidos e itens" ><i class="material-icons">delete</i></a>
+                <a href="/editOrcPed?id=<%=op.idOrcPed%>&action=editar&type=<%=op.tipo%>&last=<%=data.lastOrcPed.idOrcPed%>&numero=<%=op.idOrcPed%>&validade=<%=op.validade%>&endereco=<%=op.localEntrega%>&obs=<%=op.obs%>&idClient=<%=data.idClient%>" href="editOrcPed?id=123&action=editar&type=Pedido" class="btn-floating btn-small waves-effect waves-light green tooltipped" data-position="bottom" data-tooltip="editar este documento" ><i class="material-icons">edit</i></a>
+                <a href="<%=op.idOrcPed%>" href="listItemOrcPed?id=123&type=Pedido" class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="bottom" data-tooltip="adicionar itens" ><i class="material-icons">add</i></a>
+                <a href="<%=op.idOrcPed%>" class="btn-floating btn-small waves-effect waves-light teal tooltipped" data-position="bottom" data-tooltip="gerar pdf deste pedido" ><i class="material-icons">picture_as_pdf</i></a>
 
               </td>
             </tr>
           <% }); %>
    
       </tbody>
-    </table>       
+         </table>       
         <% } else {%>
           <br />
-          <hr />
+         
           <h3 class="center"> Nada Cadastrado </h3>
           <center><img class="center" src="cry.jpeg" /></center>
           <% } %>
        <br />
            
-      </div>
+  
 
-    </div>
+   
     <br><br>
   </div>
 
@@ -70,6 +84,8 @@
       <p>Validade: <%=data.lastOrcPed.validade%></p>
       <p>Valor Total: R$<%=data.lastOrcPed.valorTotal%></p>
       <hr />
+      <% if (data.lastItemsOrcPed.valorUnitario) { %>
+     
       <table>
         <thead>
           <tr>
@@ -80,6 +96,7 @@
               <th>Obs</th>
           </tr>
         </thead>
+        
       <% data.lastItemsOrcPed.forEach(function(op){ %>
         <tr>
           <td style="width: 40%;"><%=op.descricao%></td>
@@ -90,7 +107,12 @@
         </tr>
       <% }); %>
     </tbody>
-  </table>    
+      </table>  
+      
+      <% }else {%>
+        <h3 class="center"> Nada Cadastrado </h3>
+          <center><img class="center" src="cry.jpeg" /></center>
+        <% } %>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>

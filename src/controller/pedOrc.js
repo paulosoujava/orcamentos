@@ -17,6 +17,6 @@ exports.update = async function (req, res) {
 }
 
 exports.delete = async function (req, res) {
-  const result = await pedOrc.delete(res.locals.mysql, req.body, req.params.id)
+  const result = await pedOrc.delete(res.locals.mysql, req.params.id)
   res.json(result)
 }

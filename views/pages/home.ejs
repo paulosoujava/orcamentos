@@ -2,8 +2,7 @@
     <div class="container">
       <blockquote>
       <p class="header  black-text flow-text" style="margin-bottom: -10px; ">Último Número 015 </p>
-      &nbsp;&nbsp;<small >criado em 20/2/2020</small>
-      <p class="header  black-text flow-text" style="margin-top: -5px; ">Total de OrcPed  15 </p>
+      &nbsp;&nbsp;<small >Total de clientes <%= clients.length %></small>
     </blockquote>
     </div>
   </div>
@@ -23,7 +22,7 @@
                 <li class="collection-item"><div>Telefone <%= client.telefone %><a href="#!" class="secondary-content"><i class="material-icons">phone</i></a></div></li>
                 <li class="collection-item"><div>Cidade: <%= client.cidade %> - <%= client.uf %><a href="#!" class="secondary-content"><i class="material-icons">place</i></a></div></li>
                 <li class="collection-item"><div>CPF/CNPJ: <%= client.cpfCnpj %><a href="#!" class="secondary-content"><i class="material-icons">account_box</i></a></div></li>
-                <li class="collection-item"><div>Total de OrcPed <b>35</b><a href="#!" class="secondary-content"><i class="material-icons">filter_9_plus</i></a></div></li>
+                <li class="collection-item"><div>Total de OrcPed <b><%= client.orcPeds.length %></b><a href="#!" class="secondary-content"><i class="material-icons">filter_9_plus</i></a></div></li>
               </ul>
             </div>
             <div class="card-action">

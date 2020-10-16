@@ -1,6 +1,11 @@
 
 const pedOrcItem = require('../services/pedOrcItem')
 
+exports.index = async function (req, res) {
+  const result = await pedOrcItem.index(res.locals.mysql, req.query.id)
+  res.json(result)
+}
+
 exports.create = async function (req, res) {
   const result = await pedOrcItem.create(res.locals.mysql, req.body, req.params.id)
   res.json(result)

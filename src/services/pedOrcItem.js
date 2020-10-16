@@ -1,5 +1,10 @@
 const Generic = require('../db/dao/generic')
 
+exports.index = async function (conn, id) {
+  const generic = new Generic(conn)
+  return await generic.getAllItemsOrcPedThisIdOrcPed(id)
+}
+
 exports.create = async function (conn, data, id) {
   const generic = new Generic(conn)
   // existe este pedido/orcamento para criar este item?

@@ -6,6 +6,7 @@ const customInstance = axios.create({
   baseURL: 'http://localhost:5001/api',
   headers: { Accept: 'application/json' }
 })
+
 exports.home = async function (req, res) {
   let clients
   try {
@@ -62,7 +63,20 @@ exports.editItemOrcPed = async function (req, res) {
   } else {
     // o id é o do OrcPed
   }
-  res.render('pages/editItemOrcPed', { title, type })
+  const data = {}
+  data.id = id
+  data.type = type
+  data.action = action
+  data.title = title
+  try {
+    const result = await customInstance.get(`/pedOrc/item?id=${id}`)
+    data.items = result.data
+  //  data.listItemsOrcPed = result.data.message.lastItemsOrcPed ? result.data.message.lastItemsOrcPed : {}
+  } catch (error) {
+    console.error(error)
+  }
+
+  res.render('pages/editItemOrcPed', { data })
 }
 
 exports.editOrcPed = async function (req, res) {

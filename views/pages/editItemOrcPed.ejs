@@ -1,44 +1,53 @@
 
 <div class="row ">
   <div class="col s12 m12">
-    <div class="col s4 m4"></div>
-    <div class="col s4 m4">
+    <div class="col s3 m3"></div>
+    <div class="col s6 m6">
       <div class="row center">
         <a onclick="goBack()" class="btn-floating btn-small waves-effect waves-light blue left"><i class="material-icons">subdirectory_arrow_left</i></a>
         <div class="card">
           <br />
             <div class="card-content">
-              <p class="left flow-text"><%= title %></p>
-            <div class="row">
+              <p class="left flow-text"><%= data.title %></p>
+                <div class="row">
                  <form class="col s12 ">
                   <br /> <br />
                   <div class="row">
                     <div class="input-field col s3">
-                      <input  id="estabelecimento" type="text" class="validate">
-                      <label for="estabelecimento">Qtd</label>
+                      <i class="material-icons prefix">add_circle_outline</i>
+                      <input  id="quantidade" type="text"  value="">
+                      <label for="quantidade">Qtd</label>
                     </div>
                     <div class="input-field col s4">
-                      <input id="cnpj" type="text" class="validate">
-                      <label for="cnpj">Valor Unit.</label>
+                      <i class="material-icons prefix">attach_money</i>
+                      <input id="valorUnitario" type="text" onchange="calculate()">
+                      <label for="valorUnitario">Valor Unit.</label>
                     </div>
                     <div class="input-field col s5">
-                      <input id="validade" type="text" class="validate">
-                      <label for="validade">Valor Total.</label>
+                      <i class="material-icons prefix">attach_money</i>
+                      <input id="valorTotal" type="text" placeholder="R$">
+                      <label for="valorTotal">Valor Total.</label>
                     </div>
-                   
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="email" type="email" class="validate">
-                      <label for="email">Especificações</label>
+                      <i class="material-icons prefix">border_color</i>
+                      <textarea id="descricao"  class="materialize-textarea"></textarea>
+                      <label for="descricao">Especificações</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="endereco" type="text" class="validate">
-                      <label for="endereco">Observações</label>
+                      <i class="material-icons prefix">content_paste</i>
+                      <textarea id="obs"  class="materialize-textarea"></textarea>
+                      <label for="obs">Observações</label>
                     </div>
                   </div>
-                  <button type="submit" class="btn  right"><i class="material-icons">save</i></button>
+                  <input type="hidden" id="idOrcPed" value="<%=data.id %>" />
+                  <input type="hidden" id="action" value="<%=data.action %>" />
+                  <button id="createItemOrcPed" type="submit" class="btn  right"><i class="material-icons">save</i></button>&nbsp;&nbsp;
+                  <% if (data.items != '') { %>
+                    <a href='#' onclick='window.history.back();' class="btn  left tooltipped black" data-position="bottom" data-tooltip="limpar"><i class="material-icons">clear</i></a>
+                  <% } %>
                 </form>
               </div>
             </div>
@@ -49,5 +58,39 @@
 
     <div class="col s4 m4"></div>
   </div>
- 
+  <% if (data.items != '') { %>
+    <div class="col s12 m12">
+      <h2>Itens</h2>
+      <table style="margin-left: 20px; margin-right: 20px;">
+        <thead>
+          <tr>
+              <th>Qtd</th>
+              <th>Valor Unitário</th>
+              <th>Valor Total</th>
+              <th>Descrição</th>
+              <th>Obs</th>
+              <th>Opções</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          <% data.items.forEach(function(op){ %>
+            <tr>
+              <td style="width: 5%;"><%=op.quantidade%></td>
+              <td style="width: 10%;"><%=op.valorUnitario%></td>
+              <td style="width: 10%;"><%=op.valorTotal%></td>
+              <td style="width: 35%;"><%=op.descricao.substring(0, 30)%> <%if(op.descricao.length > 30){%>... <%}%></td>
+              <td style="width: 30%;"><%=op.obs.substring(0, 30)%> <%if(op.obs.length > 30){%>... <%}%></td>
+              <td>
+                <a onClick=(deleteItemOrcPed('<%= op.idOrcPedItem %>')) class="btn-floating btn-small waves-effect waves-light red tooltipped" data-position="bottom" data-tooltip="deletar item"><i class="material-icons">delete</i></a>
+                <a href="editItemOrcPed?id=<%=data.id%>&action=editar&idItem=<%=op.idOrcPedItem%>"  class="btn-floating btn-small waves-effect waves-light green tooltipped" data-position="bottom" data-tooltip="editar item"><i class="material-icons">edit</i></a>
+              </td>
+            </tr>
+          <%})%>
+        </tbody>
+      </table>  
+    </div> 
+    <% } %>
+      
+  <br /><br /><br />
 </div>

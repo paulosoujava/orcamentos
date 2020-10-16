@@ -64,3 +64,5 @@ WHERE  idOrcPedItem = :id;
 --name: deleteOrcPedItem
 DELETE  FROM orcamento.orcPedItem WHERE idOrcPedItem = :id;
 
+-- name: getAllItemsOrcPedThisIdOrcPed
+SELECT * FROM orcamento.orcPedItem WHERE idOrcPed = :id ORDER BY idOrcPedItem Desc;

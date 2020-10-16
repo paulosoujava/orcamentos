@@ -45,6 +45,7 @@ router.delete('/delete/pedOrc/:id', pedOrc.delete)
  */
 
 // itens pedOrc
+router.get('/pedOrc/item', itemPedOrc.index)
 router.post('/create/pedOrc/item/:id', itemPedOrc.create)
 router.put('/update/pedOrc/item/:id', itemPedOrc.update)
 router.delete('/delete/pedOrc/item/:id', itemPedOrc.delete)

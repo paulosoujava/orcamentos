@@ -1,4 +1,3 @@
-const { reset } = require('nodemon')
 const Generic = require('../db/dao/generic')
 
 exports.index = async function (conn) {

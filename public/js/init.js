@@ -133,11 +133,85 @@
       e.preventDefault()
     })
     /**********************************************************************************************/
+
+    /**********************************************************************************************
+    /** CREATE OR UPDATE PEDIDO OU ORCAMENTO */
+
+    /**********************************************************************************************/
+    $('#createItemOrcPed').click(function (e) {
+      const body = {}
+      body.obs = $('#obs').val()
+      const id = $('#idOrcPed').val()
+      let flagOk = true
+      const requireFields = ['quantidade', 'valorUnitario', 'valorTotal', 'descricao']
+      for (const field of requireFields) {
+        if ($(`#${field}`).val() === '') {
+          $(`#${field}`).focus()
+          alert('Ops..',
+            `Você deve preencher o campo ${field}`,
+            'info')
+          flagOk = false
+          break
+        }
+        body[field] = $(`#${field}`).val()
+      }
+      if (flagOk) {
+        const action = $('#action').val()
+
+        let url = `http://localhost:5001/api/create/pedOrc/item/${id}`
+        let type = 'POST'
+
+        if (action === 'editar') {
+          body.idGeneric = id
+          url = `http://localhost:5001/api/update/pedOrc/item/${id}`
+          type = 'PUT'
+        }
+        console.log()
+
+        $.ajax({
+          url: url,
+          type: type,
+          dataType: 'json',
+          data: body,
+          success: function (data) {
+            const icon = 'success'
+            const title = 'Opaaa'
+            alert(title, data.message, icon)
+            if (!data.erro) {
+              Swal.fire({
+                title: data.message,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Ok'
+              }).then((result) => {
+                document.location.reload(true)
+              })
+            } else {
+              const icon = 'info'
+              const title = 'Opss'
+              alert(title, data.message, icon)
+            }
+          },
+          error: function (data) {
+            const icon = 'error'
+            const title = 'Opss'
+            alert(title, data.message, icon)
+          }
+        })
+      }
+      e.preventDefault()
+    })
   }) // end of document ready
 })(jQuery) // end of jQuery name space
 
 function goBack () {
   window.history.back()
+}
+
+function calculate () {
+  var qtd = parseInt(document.getElementById('quantidade').value, 10)
+  var vu = parseInt(document.getElementById('valorUnitario').value, 10)
+  document.getElementById('valorTotal').value = (qtd * vu).toFixed(2)
 }
 
 function checkNum (num, old) {
@@ -213,6 +287,49 @@ function deleteOrcPed (id) {
   }).then((result) => {
     if (result.isConfirmed) {
       fetch(`http://localhost:5001/api/delete/pedOrc/${id}`, {
+        method: 'DELETE'
+      })
+        .then(response => {
+          document.location.reload(true)
+        })
+        .catch(error => {
+          Swal.showValidationMessage(
+          `Request failed: ${error}`
+          )
+        })
+    } else if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelado',
+        'Os dados continuam salvos  :)',
+        'error'
+      )
+    }
+  })
+}
+
+function deleteItemOrcPed (id) {
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success green btnDelete',
+      cancelButton: 'btn btn-danger red'
+    },
+    buttonsStyling: false
+  })
+
+  swalWithBootstrapButtons.fire({
+    title: 'Você tem certeza?',
+    text: 'Você não poderá recurperar este dado após deletar!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sim, Pode deletar!',
+    cancelButtonText: 'Não, cancele!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`http://localhost:5001/api/delete/pedOrc/item/${id}`, {
         method: 'DELETE'
       })
         .then(response => {

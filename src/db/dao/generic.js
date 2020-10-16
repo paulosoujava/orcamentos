@@ -148,6 +148,10 @@ class Generic {
       }, this._adapter))
   }
 
+  async getAllItemsOrcPedThisIdOrcPed (id) {
+    return this.hasExceptions(this._queries.getAllItemsOrcPedThisIdOrcPed({ id }, this._adapter))
+  }
+
   //* ***************** NUMBER ORCAMENTOS OU PEDIDOS *******************/
   async createNumberOrcPed (data, id) {
     return this.hasExceptions(this._queries.createNumberOrcPed(

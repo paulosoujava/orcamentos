@@ -53,7 +53,7 @@
               <td>
                 <a onClick=(deleteOrcPed('<%= op.idOrcPed %>')) class="btn-floating btn-small waves-effect waves-light red tooltipped" data-position="bottom" data-tooltip="deletar pedidos e itens" ><i class="material-icons">delete</i></a>
                 <a href="/editOrcPed?id=<%=op.idOrcPed%>&action=editar&type=<%=op.tipo%>&last=<%=data.lastOrcPed.idOrcPed%>&numero=<%=op.idOrcPed%>&validade=<%=op.validade%>&endereco=<%=op.localEntrega%>&obs=<%=op.obs%>&idClient=<%=data.idClient%>" href="editOrcPed?id=123&action=editar&type=Pedido" class="btn-floating btn-small waves-effect waves-light green tooltipped" data-position="bottom" data-tooltip="editar este documento" ><i class="material-icons">edit</i></a>
-                <a href="<%=op.idOrcPed%>" href="listItemOrcPed?id=123&type=Pedido" class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="bottom" data-tooltip="adicionar itens" ><i class="material-icons">add</i></a>
+                <a href="/editItemOrcPed?id=<%=op.idOrcPed%>" href="listItemOrcPed?id=123&type=Pedido" class="btn-floating btn-small waves-effect waves-light blue tooltipped" data-position="bottom" data-tooltip="adicionar itens" ><i class="material-icons">add</i></a>
                 <a href="<%=op.idOrcPed%>" class="btn-floating btn-small waves-effect waves-light teal tooltipped" data-position="bottom" data-tooltip="gerar pdf deste pedido" ><i class="material-icons">picture_as_pdf</i></a>
 
               </td>

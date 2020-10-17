@@ -162,6 +162,65 @@ class Generic {
       }, this._adapter))
   }
 
+  async checkHeaderByEmail (email) {
+    return this.hasExceptions(this._queries.checkHeaderByEmail({ email }, this._adapter))
+  }
+
+  async checkFooterByEmail (email) {
+    return this.hasExceptions(this._queries.checkFooterByEmail({ email }, this._adapter))
+  }
+
+  //* ***************** HEADER AND FOOTER*******************/
+  async createHeader (data) {
+    return this.hasExceptions(this._queries.createHeader({
+      nome: data.nome ? data.nome : '',
+      cnpj: data.cnpj ? data.cnpj : '',
+      email: data.email ? data.email : '',
+      telefone: data.telefone ? data.telefone : '',
+      endereco: data.endereco ? data.endereco : ''
+
+    }, this._adapter))
+  }
+
+  async updateHeader (data, id) {
+    return this.hasExceptions(this._queries.updateHeader({
+      nome: data.nome ? data.nome : '',
+      cnpj: data.cnpj ? data.cnpj : '',
+      email: data.email ? data.email : '',
+      telefone: data.telefone ? data.telefone : '',
+      endereco: data.endereco ? data.endereco : '',
+      id
+
+    }, this._adapter))
+  }
+
+  async getHeader () {
+    return this.hasExceptions(this._queries.getHeader({ }, this._adapter))
+  }
+
+  async createFooter (data) {
+    return this.hasExceptions(this._queries.createFooter({
+      nome: data.nome ? data.nome : '',
+      email: data.email ? data.email : '',
+      telefone: data.telefone ? data.telefone : ''
+
+    }, this._adapter))
+  }
+
+  async updateFooter (data, id) {
+    return this.hasExceptions(this._queries.updateFooter({
+      nome: data.nome ? data.nome : '',
+      email: data.email ? data.email : '',
+      telefone: data.telefone ? data.telefone : '',
+      id
+
+    }, this._adapter))
+  }
+
+  async getFooter () {
+    return this.hasExceptions(this._queries.getFooter({ }, this._adapter))
+  }
+
   //* ***************** ERROR *******************/
   async hasExceptions (query) {
     try {

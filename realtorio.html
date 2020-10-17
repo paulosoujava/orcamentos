@@ -1,0 +1,174 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <title>Relatório</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <style type="text/css">
+            @page{
+                margin-top: 3cm;
+                margin-left: 3cm;
+                margin-bottom: 2cm;
+                margin-left: 2cm;
+            }
+            #titulo{
+                font-size: 24px;
+                text-align: center;
+            }
+            #numeroPedido{
+                font-size: 24px;
+                text-align: right;
+            }
+            #dataPedido{
+              margin-top: -10px;
+                font-size: 14px;
+                text-align: right;
+            }
+            #tabela{
+                width: 90%;
+                font-size: 12px;
+                margin: 0 auto;
+                text-align: justify;
+                border: 1px solid black;
+                border-collapse: collapse;
+                white-space: pre-line;
+                table-layout: auto;
+                width: content-box;
+				height: content-box;
+            }
+            .celula{
+                border: 1px solid black;
+                text-align: justify;
+                font-size: 12px;
+            }
+            .celula_center{
+                border: 1px solid black;
+                text-align: center;
+                font-size: 12px;
+			}
+            .celula_head{
+                border: 2px solid black;
+                background-color: #D3D3D3;
+                text-align: center;
+                font-size: 12px;
+            }
+            #rodape-final{
+                width: 100%;
+                position: absolute;
+                top: 22cm;
+                left: 0cm;
+                bottom: 3cm;
+                right: 2cm;
+                font-size: 12px;
+            }
+            #align-right{
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="padding-left: 30px; padding-right: 30px;">
+            <p id="titulo"><b>Black Mirror Software LTDA</b></p>
+            <p id="numeroPedido"><b>Num.:001</b></p>
+            <p id="dataPedido">Data: 20/10/2020</p>
+            <p><b>Email: </b>NOME_DOblack@mirror.com.br</p>
+            <p><b>Telefone: </b>(48) 99629-7813</p>
+            <p><b>Cnpj/Cpf: </b>024.214.133-90</p>
+            <p><b>Endereço: </b>Av. Jorge lacerda Costeira do pirajubaé 2956 Cep 88046-001</p>
+            <p><b>Cidade - UF: </b>Florianópolis SC</p>
+            <p><b>Observação</b> S/O</p>
+            <p><b>Local de Entrega</b> Avenida Jorge lacerda Costeira</p>
+            <hr />
+        </div>
+        <br />
+        <table id="tabela">
+            <thead>
+                <tr>
+                	  <th class="celula_head">Quant</th>
+                    <th class="celula_head">Valor Unitário</th>
+                    <th class="celula_head">Descrição do Produto</th>
+                    <th class="celula_head">Observações</th>
+                    <th class="celula_head">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                	<td class="celula_center">10</td>
+                    <td class="celula_center">RS 10.00</td>
+                    <td class="celula_center" style="width: 70%; text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime tenetur veniam placeat voluptate incidunt aut, odio sed explicabo assumenda? Hic quis quaerat perspiciatis quisquam commodi corrupti aliquid quo nostrum ducimus.</td>
+                    <td class="celula"> S/O</td>
+                    <td class="celula">R$: 100</td>
+                    
+                </tr>
+                <tr>
+                	<td class="celula_center">10</td>
+                    <td class="celula_center">RS 10.00</td>
+                    <td class="celula_center" style="width: 70%; text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime tenetur veniam placeat voluptate incidunt aut, odio sed explicabo assumenda? Hic quis quaerat perspiciatis quisquam commodi corrupti aliquid quo nostrum ducimus.</td>
+                    <td class="celula"> S/O</td>
+                    <td class="celula">R$: 100</td>
+                    
+                </tr>
+                <tr>
+                	<td class="celula_center">10</td>
+                    <td class="celula_center">RS 10.00</td>
+                    <td class="celula_center" style="width: 70%; text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime tenetur veniam placeat voluptate incidunt aut, odio sed explicabo assumenda? Hic quis quaerat perspiciatis quisquam commodi corrupti aliquid quo nostrum ducimus.</td>
+                    <td class="celula"> S/O</td>
+                    <td class="celula">R$: 100</td>
+                    
+                </tr>
+                <tr>
+                	<td class="celula_center">10</td>
+                    <td class="celula_center">RS 10.00</td>
+                    <td class="celula_center" style="width: 70%; text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime tenetur veniam placeat voluptate incidunt aut, odio sed explicabo assumenda? Hic quis quaerat perspiciatis quisquam commodi corrupti aliquid quo nostrum ducimus.</td>
+                    <td class="celula"> S/O</td>
+                    <td class="celula">R$: 100</td>
+                    
+                </tr>
+                
+            </tbody>
+        </table>
+        <div  style="padding-left: 30px; padding-right: 70px;">
+          <p id="numeroPedido"><b>  Valor Total: 001</b></p>
+          <p id="dataPedido">Validade: 20/10/2020</p>
+          <table>
+            <tr>
+              <td>
+                <p><b>Empresa Remetente</b></p>
+                <div style="padding-left: 10px;">
+                 <p>Cnpj/Cpf: </b>024.214.133-90</p>
+                 <p>Endereço: </b>Av. Jorge lacerda Costeira do pirajubaé 2956 Cep 88046-001</p>
+                 <p>Cidade - UF: </b>Florianópolis SC</p>
+                </div>  
+                <p><b>Contato</b></p>
+                 <div style="padding-left: 10px;">
+                  <p>black@mirror.com.br</p>
+                  <p>(48) 99629-7813</p>
+                </div>
+                
+               
+
+              </td>
+              <td style="width: 50%;"><p></p></td>
+              
+              <td>
+                <p><b>Representante</b></p>
+                <p style="padding-left: 10px;"> Paulo Oliveira</p>
+                <p><b>Contato</b></p>
+                <p style="padding-left: 10px;">black@mirror.com.br</p>
+                <p style="padding-left: 10px;">(48) 99629-7813</p>
+
+              </td>
+            </tr>
+          </table>
+          
+          
+          
+          
+          
+      </div>
+        
+    </body>

@@ -135,8 +135,7 @@
     /**********************************************************************************************/
 
     /**********************************************************************************************
-    /** CREATE OR UPDATE PEDIDO OU ORCAMENTO */
-
+    /** CREATE OR UPDATE ITEM PEDIDO OU ORCAMENTO */
     /**********************************************************************************************/
     $('#createItemOrcPed').click(function (e) {
       const body = {}
@@ -162,11 +161,10 @@
         let type = 'POST'
 
         if (action === 'editar') {
-          body.idGeneric = id
-          url = `http://localhost:5001/api/update/pedOrc/item/${id}`
+          const idItem = $('#idItemOrcPed').val()
+          url = `http://localhost:5001/api/update/pedOrc/item/${idItem}`
           type = 'PUT'
         }
-        console.log()
 
         $.ajax({
           url: url,
@@ -174,9 +172,6 @@
           dataType: 'json',
           data: body,
           success: function (data) {
-            const icon = 'success'
-            const title = 'Opaaa'
-            alert(title, data.message, icon)
             if (!data.erro) {
               Swal.fire({
                 title: data.message,
@@ -184,7 +179,112 @@
                 showCancelButton: false,
                 confirmButtonText: 'Ok'
               }).then((result) => {
-                document.location.reload(true)
+                window.location.replace(`http://localhost:5001/editItemOrcPed?id=${id}`)
+              })
+            } else {
+              const icon = 'info'
+              const title = 'Opss'
+              alert(title, data.message, icon)
+            }
+          },
+          error: function (data) {
+            const icon = 'error'
+            const title = 'Opss'
+            alert(title, data.message, icon)
+          }
+        })
+      }
+      e.preventDefault()
+    })
+
+    /**********************************************************************************************
+    /** CREATE OR UPDATE HEADER */
+    /**********************************************************************************************/
+    $('#createHeader').click(function (e) {
+      const body = {}
+      let flagOk = true
+      const requireFields = ['nome', 'cnpj', 'email', 'telefone', 'endereco']
+      for (const field of requireFields) {
+        if ($(`#${field}`).val() === '') {
+          $(`#${field}`).focus()
+          alert('Ops..',
+            `Você deve preencher o campo ${field}`,
+            'info')
+          flagOk = false
+          break
+        }
+        body[field] = $(`#${field}`).val()
+      }
+      if (flagOk) {
+        const url = 'http://localhost:5001/api/system/header'
+        const type = 'POST'
+        $.ajax({
+          url: url,
+          type: type,
+          dataType: 'json',
+          data: body,
+          success: function (data) {
+            if (!data.erro) {
+              Swal.fire({
+                title: data.message,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Ok'
+              }).then((result) => {
+                window.location.replace('http://localhost:5001/header')
+              })
+            } else {
+              const icon = 'info'
+              const title = 'Opss'
+              alert(title, data.message, icon)
+            }
+          },
+          error: function (data) {
+            const icon = 'error'
+            const title = 'Opss'
+            alert(title, data.message, icon)
+          }
+        })
+      }
+      e.preventDefault()
+    })
+
+    /**********************************************************************************************
+    /** CREATE OR UPDATE FOOTER */
+    /**********************************************************************************************/
+    $('#createFooter').click(function (e) {
+      const body = {}
+      body.obs = $('#obs').val()
+      let flagOk = true
+      const requireFields = ['nome', 'email', 'telefone']
+      for (const field of requireFields) {
+        if ($(`#${field}`).val() === '') {
+          $(`#${field}`).focus()
+          alert('Ops..',
+            `Você deve preencher o campo ${field}`,
+            'info')
+          flagOk = false
+          break
+        }
+        body[field] = $(`#${field}`).val()
+      }
+      if (flagOk) {
+        const url = 'http://localhost:5001/api/system/footer'
+        const type = 'POST'
+        $.ajax({
+          url: url,
+          type: type,
+          dataType: 'json',
+          data: body,
+          success: function (data) {
+            if (!data.erro) {
+              Swal.fire({
+                title: data.message,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Ok'
+              }).then((result) => {
+                window.location.replace('http://localhost:5001/footer')
               })
             } else {
               const icon = 'info'

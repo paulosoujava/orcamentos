@@ -1,5 +1,8 @@
 const Generic = require('../db/dao/generic')
 
+const success = 'Ação realizada com sucesso!!'
+const ops = 'Ops, por favor tente mais tarde...'
+
 exports.index = async function (conn, id) {
   const generic = new Generic(conn)
   return await generic.getAllItemsOrcPedThisIdOrcPed(id)
@@ -11,9 +14,9 @@ exports.create = async function (conn, data, id) {
   if (!await checkThisOrcPed(conn, id)) return _errors(true, 'ops,este pedido/orcamento não existe')
   const saveRes = await generic.createOrcPedItem(data, id)
   if (saveRes && saveRes.affectedRows === 1) {
-    return _errors(false, 'ação realizada com sucesso')
+    return _errors(false, success)
   }
-  return _errors(true, 'ops, tente mais tarde')
+  return _errors(true, ops)
 }
 
 exports.update = async function (conn, data, id) {
@@ -21,11 +24,12 @@ exports.update = async function (conn, data, id) {
   const resut = await generic.checkByIdInOrcPedItem(id)
   if (resut.length >= 1) {
     const saveRes = await generic.updateOrcPedItem(data, id)
+
     if (saveRes && saveRes.affectedRows === 1) {
-      return _errors(false, 'ação realizada com sucesso')
+      return _errors(false, success)
     }
   } else {
-    return _errors(true, `ops, item num:: ${id} tipo:: ${data.tipo} criado em::${data.criacao} não inexistente`)
+    return _errors(true, `Ops, item num:: ${id} não inexistente`)
   }
 }
 exports.delete = async function (conn, id) {
@@ -34,10 +38,10 @@ exports.delete = async function (conn, id) {
   if (resut.length >= 1) {
     const saveRes = await generic.deleteOrcPedItem(id)
     if (saveRes && saveRes.affectedRows === 1) {
-      return _errors(false, 'ação realizada com sucesso')
+      return _errors(false, success)
     }
   } else {
-    return _errors(true, 'ops, item  não inexistente')
+    return _errors(true, ops)
   }
 }
 async function checkThisOrcPed (conn, id) {

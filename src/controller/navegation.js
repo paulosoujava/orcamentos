@@ -20,11 +20,34 @@ exports.home = async function (req, res) {
 }
 
 exports.footer = async function (req, res) {
-  res.render('pages/infoFooter')
+  let result = {}
+  try {
+    result = await customInstance.get('/system/footer')
+  } catch (error) {
+    console.error(error)
+  }
+  const data = {}
+  data.nome = result.data.message[0] ? result.data.message[0].nome : ''
+  data.email = result.data.message[0] ? result.data.message[0].email : ''
+  data.telefone = result.data.message[0] ? result.data.message[0].telefone : ''
+
+  res.render('pages/infoFooter', { data })
 }
 
 exports.header = async function (req, res) {
-  res.render('pages/infoHeader')
+  let result = {}
+  try {
+    result = await customInstance.get('/system/header')
+  } catch (error) {
+    console.error(error)
+  }
+  const data = {}
+  data.nome = result.data.message[0] ? result.data.message[0].nome : ''
+  data.email = result.data.message[0] ? result.data.message[0].email : ''
+  data.endereco = result.data.message[0] ? result.data.message[0].endereco : ''
+  data.telefone = result.data.message[0] ? result.data.message[0].telefone : ''
+  data.cnpj = result.data.message[0] ? result.data.message[0].cnpj : ''
+  res.render('pages/infoHeader', { data })
 }
 
 exports.listar = async function (req, res) {
@@ -55,7 +78,7 @@ exports.listItemOrcPed = async function (req, res) {
 exports.editItemOrcPed = async function (req, res) {
   // action === create id === OrcPed
   // action === editar id === ItemOrcPed
-  const { id, type, action } = req.query
+  const { id, type, action, qtd, vu, vt, desc, obs, idItem } = req.query
   let title = 'Cadastrar Item'
   if (action === 'editar') {
     title = 'Editar Item'
@@ -68,6 +91,12 @@ exports.editItemOrcPed = async function (req, res) {
   data.type = type
   data.action = action
   data.title = title
+  data.qtd = qtd
+  data.vu = vu
+  data.vt = vt
+  data.desc = desc
+  data.obs = obs
+  data.idItem = idItem
   try {
     const result = await customInstance.get(`/pedOrc/item?id=${id}`)
     data.items = result.data

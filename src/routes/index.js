@@ -3,6 +3,7 @@ const router = express.Router()
 const generic = require('../controller/generic')
 const pedOrc = require('../controller/pedOrc')
 const itemPedOrc = require('../controller/pedOrcItem')
+const system = require('../controller/system')
 
 // /api or /api/?email=paulo@gmail.com
 router.get('/', generic.index)
@@ -59,5 +60,11 @@ router.delete('/delete/pedOrc/item/:id', itemPedOrc.delete)
       "obs" : "verificar estoque"
    }
  */
+
+// Header
+router.post('/system/header', system.createHeader)
+router.get('/system/header', system.indexHeader)
+router.post('/system/footer', system.createFooter)
+router.get('/system/footer', system.indexFooter)
 
 module.exports = router

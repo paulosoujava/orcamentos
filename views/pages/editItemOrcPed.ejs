@@ -15,34 +15,35 @@
                   <div class="row">
                     <div class="input-field col s3">
                       <i class="material-icons prefix">add_circle_outline</i>
-                      <input  id="quantidade" type="text"  value="">
+                      <input  id="quantidade" type="text"  value="<%= data.qtd %>">
                       <label for="quantidade">Qtd</label>
                     </div>
                     <div class="input-field col s4">
                       <i class="material-icons prefix">attach_money</i>
-                      <input id="valorUnitario" type="text" onchange="calculate()">
+                      <input id="valorUnitario" type="text" onchange="calculate()" value="<%= data.vu %>">
                       <label for="valorUnitario">Valor Unit.</label>
                     </div>
                     <div class="input-field col s5">
                       <i class="material-icons prefix">attach_money</i>
-                      <input id="valorTotal" type="text" placeholder="R$">
+                      <input id="valorTotal" type="text" placeholder="R$" value="<%= data.vt %>">
                       <label for="valorTotal">Valor Total.</label>
                     </div>
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">border_color</i>
-                      <textarea id="descricao"  class="materialize-textarea"></textarea>
+                      <textarea id="descricao"  class="materialize-textarea"><%= data.desc %></textarea>
                       <label for="descricao">Especificações</label>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">content_paste</i>
-                      <textarea id="obs"  class="materialize-textarea"></textarea>
+                      <textarea id="obs"  class="materialize-textarea"><%= data.obs %></textarea>
                       <label for="obs">Observações</label>
                     </div>
                   </div>
                   <input type="hidden" id="idOrcPed" value="<%=data.id %>" />
+                  <input type="hidden" id="idItemOrcPed" value="<%=data.idItem %>" />
                   <input type="hidden" id="action" value="<%=data.action %>" />
                   <button id="createItemOrcPed" type="submit" class="btn  right"><i class="material-icons">save</i></button>&nbsp;&nbsp;
                   <% if (data.items != '') { %>
@@ -83,7 +84,8 @@
               <td style="width: 30%;"><%=op.obs.substring(0, 30)%> <%if(op.obs.length > 30){%>... <%}%></td>
               <td>
                 <a onClick=(deleteItemOrcPed('<%= op.idOrcPedItem %>')) class="btn-floating btn-small waves-effect waves-light red tooltipped" data-position="bottom" data-tooltip="deletar item"><i class="material-icons">delete</i></a>
-                <a href="editItemOrcPed?id=<%=data.id%>&action=editar&idItem=<%=op.idOrcPedItem%>"  class="btn-floating btn-small waves-effect waves-light green tooltipped" data-position="bottom" data-tooltip="editar item"><i class="material-icons">edit</i></a>
+                <a href="editItemOrcPed?id=<%=data.id%>&action=editar&idItem=<%=op.idOrcPedItem%>&qtd=<%=op.quantidade%>&vu=<%=op.valorUnitario%>&vt=<%=op.valorTotal%>&desc=<%=op.descricao%>&obs=<%=op.obs%>" 
+                   class="btn-floating btn-small waves-effect waves-light green tooltipped" data-position="bottom" data-tooltip="editar item"><i class="material-icons">edit</i></a>
               </td>
             </tr>
           <%})%>

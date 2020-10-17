@@ -66,3 +66,33 @@ DELETE  FROM orcamento.orcPedItem WHERE idOrcPedItem = :id;
 
 -- name: getAllItemsOrcPedThisIdOrcPed
 SELECT * FROM orcamento.orcPedItem WHERE idOrcPed = :id ORDER BY idOrcPedItem Desc;
+
+-- name: createHeader
+INSERT INTO header ( nome, endereco, telefone, email, cnpj)
+VALUES (:nome,  :endereco, :telefone,  :email, :cnpj);
+
+-- name: createFooter
+INSERT INTO footer ( nome, telefone, email )
+VALUES (:nome,  :telefone,  :email );
+
+--name: getHeader
+SELECT * FROM orcamento.header LIMIT 1;
+
+--name: getFooter
+SELECT * FROM orcamento.footer LIMIT 1;
+
+--name: checkHeaderByEmail
+SELECT * FROM orcamento.header WHERE email = :email;
+
+--name: checkFooterByEmail
+SELECT * FROM orcamento.footer WHERE email = :email;
+
+--name: updateHeader
+UPDATE orcamento.header
+SET nome = :nome,  email= :email, telefone= :telefone, cnpj= :cnpj, endereco= :endereco
+WHERE  idheader = :id;
+
+--name: updateFooter
+UPDATE orcamento.footer
+SET nome = :nome,  email= :email, telefone= :telefone
+WHERE  idFooter = :id;
